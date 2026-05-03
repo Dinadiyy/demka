@@ -1,0 +1,45 @@
+CREATE TABLE Products (
+    Article NVARCHAR(50) PRIMARY KEY,
+    Name NVARCHAR(150),
+    Unit NVARCHAR(50),
+    Price DECIMAL(10,2),
+    Supplier NVARCHAR(150),
+    Manufacturer NVARCHAR(150),
+    Category NVARCHAR(100),
+    Discount DECIMAL(5,2),
+    Quantity INT,
+    Description NVARCHAR(MAX),
+    Photo NVARCHAR(255)
+);
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY,
+    FullName NVARCHAR(150) NOT NULL,
+    Login NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(100) NOT NULL,
+    Role NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE PVZ (
+    PVZID INT PRIMARY KEY IDENTITY,
+    PostalCode NVARCHAR(20),
+    City NVARCHAR(100),
+    Street NVARCHAR(150)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY IDENTITY,
+    OrderNumber NVARCHAR(50) NOT NULL,
+    Article NVARCHAR(50),
+    OrderDate DATE,
+    DeliveryDate DATE,
+    PVZID INT,
+    ClientName NVARCHAR(150),
+    PickupCode NVARCHAR(50),
+    Status NVARCHAR(50),
+);
+
+UPDATE Users
+SET 
+    Login = REPLACE(REPLACE(REPLACE(LTRIM(RTRIM(Login)), CHAR(13), ''), CHAR(10), ''), CHAR(9), ''),
+    Password = REPLACE(REPLACE(REPLACE(LTRIM(RTRIM(Password)), CHAR(13), ''), CHAR(10), ''), CHAR(9), '');
